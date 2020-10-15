@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IGuideRepository {
-    int save(int id, Guide guide);
+    int save( Guide guide);
 
     int update(Guide guide);
 

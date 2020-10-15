@@ -2,7 +2,6 @@ package com.tripdeal.services.guide;
 
 import com.tripdeal.models.Guide;
 import com.tripdeal.repository.guide.GuideRepository;
-import com.tripdeal.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +10,11 @@ import java.util.Optional;
 @Service
 public class GuideService  implements IGuideService{
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
    private  GuideRepository guideRepository;
 
     @Override
     public int save(Guide guide) {
-       int id =  userRepository.save(guide);
-        return guideRepository.save(id, guide) ;
+        return guideRepository.save(guide) ;
     }
 
     @Override

@@ -1,24 +1,24 @@
 package com.tripdeal.models;
 
-public class Guide extends User{
-    private int user_id;
+public class Guide {
+    private int guide_id;
     private String idCertificate;
     private String descriptionGuide;
     private int rate;
 
-
-    public Guide(int user_id, String idCertificate, String descriptionGuide, int rate) {
-        this.user_id = user_id;
+    public Guide(int guide_id, String idCertificate, String descriptionGuide, int rate) {
+        this.guide_id = guide_id;
         this.idCertificate = idCertificate;
         this.descriptionGuide = descriptionGuide;
         this.rate = rate;
     }
 
-    public Guide(int id, String firstName, String lastName, String email, String password, String city, String country, String phoneNum, String idCertificate, String descriptionGuide, int rate) {
-        super( id, firstName, lastName, email, password, city, country, phoneNum);
-        this.idCertificate = idCertificate;
-        this.descriptionGuide = descriptionGuide;
-        this.rate = rate;
+    public int getGuide_id() {
+        return guide_id;
+    }
+
+    public void setGuide_id(int guide_id) {
+        this.guide_id = guide_id;
     }
 
     public String getIdCertificate() {
@@ -44,19 +44,11 @@ public class Guide extends User{
     public void setRate(int rate) {
         this.rate = rate;
     }
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
 
     @Override
     public String toString() {
         return "Guide{" +
-                "user_id=" + user_id +
+                "guide_id=" + guide_id +
                 ", idCertificate='" + idCertificate + '\'' +
                 ", descriptionGuide='" + descriptionGuide + '\'' +
                 ", rate=" + rate +
