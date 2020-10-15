@@ -1,8 +1,10 @@
 package com.tripdeal;
 
 import com.tripdeal.models.Guide;
+import com.tripdeal.models.TripRegister;
 import com.tripdeal.models.User;
 import com.tripdeal.services.guide.GuideService;
+import com.tripdeal.services.tripregister.TripRegisterService;
 import com.tripdeal.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +19,8 @@ public class MyTripApplication implements CommandLineRunner {
     UserService userService;
     @Autowired
     GuideService guideService;
+    @Autowired
+    TripRegisterService tripRegisterService;
     public static void main(String[] args) {
         SpringApplication.run(MyTripApplication.class, args);
     }
@@ -26,13 +30,22 @@ public class MyTripApplication implements CommandLineRunner {
         System.out.println("StartApplication...");
         try {
           // testUserData();
-            testGuideData();
-
+          //  testGuideData();
+            testTripRegisterData();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
+    private void testTripRegisterData() {
+        TripRegister tripRegister = new TripRegister(3,1,"Golan", new Date(2020-10-23),4);
+        System.out.println("[SAVE]");
+        tripRegisterService.save(tripRegister);
+        System.out.println("[SAVE ENDING]");
+        System.out.println("Get all trip registers: " + tripRegisterService.findAll());
+
+
+    }
 
 
     void testUserData() throws Throwable {
