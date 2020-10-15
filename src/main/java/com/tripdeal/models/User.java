@@ -1,10 +1,10 @@
 package com.tripdeal.models;
 
+import com.tripdeal.MySuperId;
+
 import javax.persistence.*;
 
-public class User {
-
-    private int id;
+public class User extends MySuperId {
     private String firstName;
     private String lastName;
     private String email;
@@ -14,8 +14,7 @@ public class User {
     private String phoneNum;
 
     public User(int id, String firstName, String lastName, String email, String password, String city, String country, String phoneNum) {
-        super();
-        this.id = id;
+        super(id);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -23,18 +22,6 @@ public class User {
         this.city = city;
         this.country = country;
         this.phoneNum = phoneNum;
-    }
-
-    public User() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -96,7 +83,6 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

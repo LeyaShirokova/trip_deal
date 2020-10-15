@@ -14,19 +14,19 @@ public class GuideRepository implements  IGuideRepository{
     JdbcTemplate jdbcTemplate;
     @Override
     public int save( Guide guide) {
-        return jdbcTemplate.update("insert into guide(guide_id, idCertificate, descriptionGuide, rate) values(?,?,?,?)",
-              guide.getGuide_id(), guide.getIdCertificate(), guide.getDescriptionGuide(), guide.getRate());
+        return jdbcTemplate.update("insert into guide( idCertificate, descriptionGuide, rate) values(?,?,?)",
+               guide.getIdCertificate(), guide.getDescriptionGuide(), guide.getRate());
     }
 
     @Override
     public int update(Guide guide) {
-        return jdbcTemplate.update("update guide set rate = ? where guide_id = ?", guide.getRate() ,guide.getGuide_id()
+        return jdbcTemplate.update("update guide set rate = ? where id = ?", guide.getRate() ,guide.getId()
                 );
     }
 
     @Override
     public int deleteById(int id) {
-        return jdbcTemplate.update("delete from guide where guide_id = ?", id);
+        return jdbcTemplate.update("delete from guide where id = ?", id);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class GuideRepository implements  IGuideRepository{
         return jdbcTemplate.query(
                 "select * from guide",
                 (rs, rowNum) -> new Guide(
-                        rs.getInt("guide_id"),
+                        rs.getInt("id"),
                         rs.getString("idCertificate"),
                         rs.getString("descriptionGuide"),
                         rs.getInt("rate")));
@@ -42,9 +42,9 @@ public class GuideRepository implements  IGuideRepository{
 
     @Override
     public Optional findById(Long id) {
-           return jdbcTemplate.queryForObject("SELECT * FROM guide WHERE guide_id = ?", new Object[]{id},(rs, rowNum) ->
+           return jdbcTemplate.queryForObject("SELECT * FROM guide WHERE id = ?", new Object[]{id},(rs, rowNum) ->
                 Optional.of(new Guide(
-                        rs.getInt("guide_id"),
+                        rs.getInt("id"),
                         rs.getString("idCertificate"),
                         rs.getString("descriptionGuide"),
                         rs.getInt("rate"))));

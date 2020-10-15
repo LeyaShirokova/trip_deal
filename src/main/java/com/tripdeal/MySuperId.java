@@ -1,0 +1,24 @@
+package com.tripdeal;
+
+public class MySuperId {
+    private int id;
+
+    public MySuperId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "MySuperId{" +
+                "id=" + id +
+                '}';
+    }
+}

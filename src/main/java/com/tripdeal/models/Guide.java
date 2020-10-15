@@ -1,24 +1,17 @@
 package com.tripdeal.models;
 
-public class Guide {
-    private int guide_id;
+import com.tripdeal.MySuperId;
+
+public class Guide extends MySuperId {
     private String idCertificate;
     private String descriptionGuide;
     private int rate;
 
-    public Guide(int guide_id, String idCertificate, String descriptionGuide, int rate) {
-        this.guide_id = guide_id;
+    public Guide(int id, String idCertificate, String descriptionGuide, int rate) {
+        super(id);
         this.idCertificate = idCertificate;
         this.descriptionGuide = descriptionGuide;
         this.rate = rate;
-    }
-
-    public int getGuide_id() {
-        return guide_id;
-    }
-
-    public void setGuide_id(int guide_id) {
-        this.guide_id = guide_id;
     }
 
     public String getIdCertificate() {
@@ -48,8 +41,7 @@ public class Guide {
     @Override
     public String toString() {
         return "Guide{" +
-                "guide_id=" + guide_id +
-                ", idCertificate='" + idCertificate + '\'' +
+                "idCertificate='" + idCertificate + '\'' +
                 ", descriptionGuide='" + descriptionGuide + '\'' +
                 ", rate=" + rate +
                 '}';
