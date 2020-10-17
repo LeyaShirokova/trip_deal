@@ -30,9 +30,9 @@ public class MyTripApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("StartApplication...");
         try {
-          // testUserData();
+           testUserData();
           //  testGuideData();
-            testTripRegisterData();
+          //  testTripRegisterData();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -63,24 +63,28 @@ public class MyTripApplication implements CommandLineRunner {
                // new User(2,"Leya","Shi","shi@gmail.com","passwordLShi","TLV","Israel","0522223344");
               //  new User(3,"Shoshana","Shalom","shoshi@gmail.com","passwordShoSham","Bat-Yam","Israel","0524444365");
                // new User(4,"Haim","Moshe","hsim@gmail.com","1234","Beer-Sheva","Israel","044466655");
-                new User(5,"Success","YES","gmail.com","YOOHO","TLV","Israel","0599999457");
+               // new User(5,"Success","YES","gmail.com","YOOHO","TLV","Israel","0599999457");
+                new User(7,"Israel","Israely","israel@","1234567","TLV","Israel","05222222");
          System.out.println("[SAVE]");
-         userService.save(user);
-         System.out.println("[SAVE ENDING]");
+        if(userService.save(user) == 0){
+            System.out.println("User not saved, check your email or password");
+        }else {
+            System.out.println("[SAVE ENDING]");
+        }
          // find all
          System.out.println("Get all users" + userService.findAll());
-         //find by id
-         System.out.println("Find user where id is 2 : "+userService.findById(2L).orElseThrow(IllegalArgumentException::new));
-//         //update
-//         System.out.println("Update password");
-//         user.setPassword("New33Password");
-//         System.out.println("Rows affected: "+userService.update(user));
-         //delete user by id
-         System.out.println("Delete user with id 4");
-         System.out.println("Rows affected: "+ userService.deleteById(4));
-         // find all
-         System.out.println("Get updated list of Users: "+userService.findAll());
-         System.out.println("*********************************************************************************************");
+//         //find by id
+//         System.out.println("Find user where id is 2 : "+userService.findById(2L).orElseThrow(IllegalArgumentException::new));
+////         //update
+////         System.out.println("Update password");
+////         user.setPassword("New33Password");
+////         System.out.println("Rows affected: "+userService.update(user));
+//         //delete user by id
+//         System.out.println("Delete user with id 4");
+//         System.out.println("Rows affected: "+ userService.deleteById(4));
+//         // find all
+//         System.out.println("Get updated list of Users: "+userService.findAll());
+//         System.out.println("*********************************************************************************************");
     }
 
     void testGuideData() throws Throwable {
