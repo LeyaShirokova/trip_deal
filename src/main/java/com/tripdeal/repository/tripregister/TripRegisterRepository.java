@@ -1,6 +1,5 @@
 package com.tripdeal.repository.tripregister;
 
-import com.tripdeal.models.Guide;
 import com.tripdeal.models.TripRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,8 +14,8 @@ public class TripRegisterRepository implements ITripRegisterRepository{
     JdbcTemplate jdbcTemplate;
     @Override
     public int save(TripRegister tripRegister) {
-        return jdbcTemplate.update("insert into trip_register(nameTrip,dateOfTrip,levelOfDifficulty) values(?,?,?)",
-                tripRegister.getNameTrip(), tripRegister.getDateOfTrip(), tripRegister.getLevelOfTrip());
+        return jdbcTemplate.update("insert into trip_register(id,trip_id,nameTrip,dateOfTrip,levelOfDifficulty) values(?,?,?,?,?)",
+                tripRegister.getId(),tripRegister.getTrip_id(),tripRegister.getNameTrip(), tripRegister.getDateOfTrip(), tripRegister.getLevelOfTrip());
     }
 
     @Override
@@ -26,7 +25,7 @@ public class TripRegisterRepository implements ITripRegisterRepository{
 
     @Override
     public int deleteById(int id) {
-        return jdbcTemplate.update("delete from trip_register where id =?",id);
+        return jdbcTemplate.update("delete from trip_register where trip_id =?",id);
     }
 
     @Override
@@ -43,10 +42,10 @@ public class TripRegisterRepository implements ITripRegisterRepository{
 
     @Override
     public Optional findById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM trip_register WHERE id = ?", new Object[]{id},(rs, rowNum) ->
+        return jdbcTemplate.queryForObject("SELECT * FROM trip_register WHERE trip_id = ?", new Object[]{id},(rs, rowNum) ->
                 Optional.of(new TripRegister(
-                        rs.getInt("trip_id"),
                         rs.getInt("id"),
+                        rs.getInt("trip_id"),
                         rs.getString("nameTrip"),
                         rs.getDate("dateOfTrip"),
                         rs.getInt("levelOfDifficulty"))));

@@ -1,7 +1,7 @@
 package com.tripdeal;
 
 public class MySuperId {
-    private int id;
+    protected int id;
 
     public MySuperId(int id) {
         this.id = id;

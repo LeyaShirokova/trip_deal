@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootApplication
@@ -37,12 +38,20 @@ public class MyTripApplication implements CommandLineRunner {
         }
     }
 
-    private void testTripRegisterData() {
-        TripRegister tripRegister = new TripRegister(3,1,"Golan", new Date(2020-10-23),4);
-        System.out.println("[SAVE]");
-        tripRegisterService.save(tripRegister);
-        System.out.println("[SAVE ENDING]");
-        System.out.println("Get all trip registers: " + tripRegisterService.findAll());
+    private void testTripRegisterData() throws Throwable{
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+       TripRegister tripRegister = new TripRegister(5,4,"Hermon", simpleDateFormat.parse("2021-01-01"),3);
+//        System.out.println("[SAVE]");
+//        tripRegisterService.save((tripRegister));
+//        System.out.println("[SAVE ENDING]");
+//        System.out.println("Get all trip registers: " + tripRegisterService.findAll());
+//        System.out.println("Find trip where trip_id = 1 : "+tripRegisterService.findById(1L).orElseThrow(IllegalArgumentException::new));
+//        System.out.println("Update day of trip: ");
+//        tripRegister.setDateOfTrip( simpleDateFormat.parse("2021-01-02"));
+//        tripRegisterService.update(tripRegister);
+//        System.out.println("Get all trip registers: " + tripRegisterService.findAll());
+        System.out.println("Delete trip with trip_id = 4");
+        System.out.println("Rows affected: "+ tripRegisterService.deleteById(4));
 
 
     }
