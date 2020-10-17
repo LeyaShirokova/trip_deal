@@ -23,11 +23,16 @@ public class UserService implements IUserService {
             System.out.println("Your password must be 6 or more symbols long");
             return 0;
         }
+
         return userRepository.save(user);
     }
 
     @Override
     public int update(User user) {
+        if (user.getPassword().length() <= 6) {
+            System.out.println("Your password must be 6 or more symbols long");
+            return 0;
+        }
         return userRepository.update(user);
     }
 

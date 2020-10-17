@@ -5,6 +5,7 @@ import com.tripdeal.repository.tripregister.TripRegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,11 +16,28 @@ public class TripRegisterService implements ITripRegisterService {
 
     @Override
     public int save(TripRegister tripRegister) {
+        if(tripRegister.getDateOfTrip().isBefore(LocalDate.now())){
+            System.out.println("You cannot register a new trip if this date has already passed. Enter a future date");
+            return 0;
+        }
+        if(tripRegister.getLevelOfTrip() > 5){
+            System.out.println("The difficulty of the trip is estimated from 1 to 5. Try add again");
+            return 0;
+        }
         return tripRegisterRepository.save(tripRegister);
     }
 
     @Override
     public int update(TripRegister tripRegister) {
+
+        if(tripRegister.getDateOfTrip().isBefore(LocalDate.now())){
+            System.out.println("You cannot register a new trip if this date has already passed. Enter a future date");
+            return 0;
+        }
+        if(tripRegister.getLevelOfTrip() > 5){
+            System.out.println("The difficulty of the trip is estimated from 1 to 5. Try add again");
+            return 0;
+        }
         return tripRegisterRepository.update(tripRegister);
     }
 

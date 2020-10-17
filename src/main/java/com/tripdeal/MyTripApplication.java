@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class MyTripApplication implements CommandLineRunner {
@@ -32,26 +33,25 @@ public class MyTripApplication implements CommandLineRunner {
         try {
             // testUserData();
             // testGuideData();
-            //  testTripRegisterData();
+              testTripRegisterData();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
     private void testTripRegisterData() throws Throwable {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        TripRegister tripRegister = new TripRegister(5, 4, "Hermon", simpleDateFormat.parse("2021-01-01"), 3);
+        TripRegister tripRegister = new TripRegister(5, 4, "Akko city", LocalDate.of(2020,10,18), 2);
         System.out.println("[SAVE]");
         tripRegisterService.save((tripRegister));
         System.out.println("[SAVE ENDING]");
         System.out.println("Get all trip registers: " + tripRegisterService.findAll());
-        System.out.println("Find trip where trip_id = 1 : " + tripRegisterService.findById(1L).orElseThrow(IllegalArgumentException::new));
-        System.out.println("Update day of trip: ");
-        tripRegister.setDateOfTrip(simpleDateFormat.parse("2021-01-02"));
-        tripRegisterService.update(tripRegister);
-        System.out.println("Get all trip registers: " + tripRegisterService.findAll());
-        System.out.println("Delete trip with trip_id = 4");
-        System.out.println("Rows affected: " + tripRegisterService.deleteById(4));
+//        System.out.println("Find trip where trip_id : " + tripRegisterService.findById(3L).orElseThrow(IllegalArgumentException::new));
+//        System.out.println("Update day of trip: ");
+//        tripRegister.setDateOfTrip(LocalDate.of(2021,01,01));
+//        tripRegisterService.update(tripRegister);
+//        System.out.println("Get all trip registers: " + tripRegisterService.findAll());
+//        System.out.println("Delete trip with trip_id ");
+//        System.out.println("Rows affected: " + tripRegisterService.deleteById(5));
 
 
     }

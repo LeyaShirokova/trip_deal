@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ public class TripRegisterRepository implements ITripRegisterRepository {
                         rs.getInt("trip_id"),
                         rs.getInt("id"),
                         rs.getString("nameTrip"),
-                        rs.getDate("dateOfTrip"),
+                        rs.getObject("dateOfTrip", LocalDate.class),
                         rs.getInt("levelOfDifficulty")
                 ));
     }
@@ -48,7 +49,7 @@ public class TripRegisterRepository implements ITripRegisterRepository {
                         rs.getInt("id"),
                         rs.getInt("trip_id"),
                         rs.getString("nameTrip"),
-                        rs.getDate("dateOfTrip"),
+                        rs.getObject("dateOfTrip", LocalDate.class),
                         rs.getInt("levelOfDifficulty"))));
     }
 }

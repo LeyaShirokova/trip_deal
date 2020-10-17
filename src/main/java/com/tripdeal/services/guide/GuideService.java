@@ -15,11 +15,21 @@ public class GuideService implements IGuideService {
 
     @Override
     public int save(Guide guide) {
+        if (guide.getRate() > 5 && guide.getRate() <= 0) {
+            System.out.println("The rating can be set no higher than 5");
+            return 0;
+        }
+
         return guideRepository.save(guide);
     }
 
     @Override
     public int update(Guide guide) {
+
+        if (guide.getRate() > 5 && guide.getRate() <= 0) {
+            System.out.println("The rating can be set no higher than 5");
+            return 0;
+        }
         return guideRepository.update(guide);
     }
 

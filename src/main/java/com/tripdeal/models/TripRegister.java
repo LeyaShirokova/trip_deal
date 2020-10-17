@@ -2,16 +2,17 @@ package com.tripdeal.models;
 
 import com.tripdeal.MySuperId;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class TripRegister extends MySuperId {
     private int trip_id;
     private String nameTrip;
-    private Date dateOfTrip;
+    private LocalDate dateOfTrip;
     private int levelOfTrip;
 
 
-    public TripRegister(int id, int trip_id, String nameTrip, Date dateOfTrip, int levelOfTrip) {
+    public TripRegister(int id, int trip_id, String nameTrip, LocalDate dateOfTrip, int levelOfTrip) {
         super(id);
         this.trip_id = trip_id;
         this.nameTrip = nameTrip;
@@ -35,11 +36,11 @@ public class TripRegister extends MySuperId {
         this.nameTrip = nameTrip;
     }
 
-    public Date getDateOfTrip() {
+    public LocalDate getDateOfTrip() {
         return dateOfTrip;
     }
 
-    public void setDateOfTrip(Date dateOfTrip) {
+    public void setDateOfTrip(LocalDate dateOfTrip) {
         this.dateOfTrip = dateOfTrip;
     }
 
