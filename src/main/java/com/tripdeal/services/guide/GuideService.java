@@ -7,14 +7,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
-public class GuideService  implements IGuideService{
+public class GuideService implements IGuideService {
     @Autowired
-   private  GuideRepository guideRepository;
+    private GuideRepository guideRepository;
 
     @Override
     public int save(Guide guide) {
-        return guideRepository.save(guide) ;
+        return guideRepository.save(guide);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class GuideService  implements IGuideService{
     @Override
     public int deleteById(int id) {
 
-       return guideRepository.deleteById(id);
+        return guideRepository.deleteById(id);
     }
 
     @Override

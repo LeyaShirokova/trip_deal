@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class TripRegisterService implements ITripRegisterService {
-@Autowired
+    @Autowired
     TripRegisterRepository tripRegisterRepository;
+
     @Override
     public int save(TripRegister tripRegister) {
         return tripRegisterRepository.save(tripRegister);

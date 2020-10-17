@@ -22,7 +22,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public int update(User user) {
-        return jdbcTemplate.update("update user set password = ? where id = ?", user.getPassword(), user.getId());
+        return jdbcTemplate.update("update user set firstName =?, lastName =?, password = ?, city =?, country=?, phoneNum =? where id = ?", user.getFirstName(), user.getLastName(), user.getPassword(), user.getCity(), user.getCountry(), user.getPhoneNum(), user.getId());
     }
 
     @Override
@@ -37,16 +37,16 @@ public class UserRepository implements IUserRepository {
                         rs.getInt("id"),
                         rs.getString("firstName"),
                         rs.getString("lastName"),
-                                rs.getString("email"),
-                                rs.getString("password"),
-                                rs.getString("city"),
-                                rs.getString("country"),
-                                rs.getString("phoneNum")));
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("city"),
+                        rs.getString("country"),
+                        rs.getString("phoneNum")));
     }
 
     @Override
     public Optional findById(Long id) {
-        return jdbcTemplate.queryForObject("select * from user where id = ?", new Object[]{id},(rs, rowNum) ->
+        return jdbcTemplate.queryForObject("select * from user where id = ?", new Object[]{id}, (rs, rowNum) ->
                 Optional.of(new User(
                         rs.getInt("id"),
                         rs.getString("firstName"),
