@@ -15,13 +15,18 @@ public class UserService implements IUserService {
 
     @Override
     public int save(User user) {
-        if (!user.getEmail().contains("@")) {
-            System.out.println("Error, your email address must contain @ symbol");
-            return 0;
+        if(user.getFirstName() == null && user.getLastName() == null){
+            throw new IllegalArgumentException("You should initialise your FirstName and LastName ");
         }
-        if (user.getPassword().length() <= 6) {
-            System.out.println("Your password must be 6 or more symbols long");
-            return 0;
+        if(user.getEmail().isEmpty()){
+            throw new IllegalArgumentException("Email not initialised");
+        }
+        if (!user.getEmail().contains("@")) {
+            throw new IllegalArgumentException("Error, your email address must contain @ symbol");
+        }
+
+        if (user.getPassword().length() <= 7) {
+            throw new IllegalArgumentException("Your password must be 7 or more symbols long");
         }
 
         return userRepository.save(user);
@@ -29,9 +34,8 @@ public class UserService implements IUserService {
 
     @Override
     public int update(User user) {
-        if (user.getPassword().length() <= 6) {
-            System.out.println("Your password must be 6 or more symbols long");
-            return 0;
+        if (user.getPassword().length() <= 7) {
+            throw new IllegalArgumentException("Your password must be 7 or more symbols long");
         }
         return userRepository.update(user);
     }

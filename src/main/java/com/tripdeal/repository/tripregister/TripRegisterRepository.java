@@ -1,6 +1,7 @@
 package com.tripdeal.repository.tripregister;
 
 import com.tripdeal.models.TripRegister;
+import com.tripdeal.models.TripTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,18 +12,19 @@ import java.util.Optional;
 
 @Repository
 public class TripRegisterRepository implements ITripRegisterRepository {
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
     public int save(TripRegister tripRegister) {
-        return jdbcTemplate.update("insert into trip_register(id,trip_id,nameTrip,dateOfTrip,levelOfDifficulty) values(?,?,?,?,?)",
-                tripRegister.getId(), tripRegister.getTrip_id(), tripRegister.getNameTrip(), tripRegister.getDateOfTrip(), tripRegister.getLevelOfTrip());
+        return jdbcTemplate.update("insert into trip_register(id,trip_id,nameTrip,dateOfTrip,levelOfDifficulty, trip_types) values(?,?,?,?,?,?)",
+                tripRegister.getId(), tripRegister.getTrip_id(), tripRegister.getNameTrip(), tripRegister.getDateOfTrip(), tripRegister.getLevelOfDifficulty(), tripRegister.getTripTypes().getValue());
     }
 
     @Override
     public int update(TripRegister tripRegister) {
-        return jdbcTemplate.update("update trip_register set nameTrip= ?,dateOfTrip =?, levelOfDifficulty =? where id = ?", tripRegister.getNameTrip(), tripRegister.getDateOfTrip(), tripRegister.getLevelOfTrip(), tripRegister.getId());
+        return jdbcTemplate.update("update trip_register set trip_types =? ,nameTrip= ?,dateOfTrip =?, levelOfDifficulty =? where trip_id = ?",tripRegister.getTripTypes().getValue(), tripRegister.getNameTrip(), tripRegister.getDateOfTrip(), tripRegister.getLevelOfDifficulty(), tripRegister.getTrip_id());
     }
 
     @Override
@@ -34,12 +36,12 @@ public class TripRegisterRepository implements ITripRegisterRepository {
     public List findAll() {
         return jdbcTemplate.query("select * from trip_register",
                 (rs, rowNum) -> new TripRegister(
-                        rs.getInt("trip_id"),
                         rs.getInt("id"),
+                        rs.getInt("trip_id"),
                         rs.getString("nameTrip"),
                         rs.getObject("dateOfTrip", LocalDate.class),
-                        rs.getInt("levelOfDifficulty")
-                ));
+                        rs.getInt("levelOfDifficulty"),
+                        TripTypes.valueOf(rs.getString("trip_types"))));
     }
 
     @Override
@@ -50,6 +52,7 @@ public class TripRegisterRepository implements ITripRegisterRepository {
                         rs.getInt("trip_id"),
                         rs.getString("nameTrip"),
                         rs.getObject("dateOfTrip", LocalDate.class),
-                        rs.getInt("levelOfDifficulty"))));
+                        rs.getInt("levelOfDifficulty"),
+                        TripTypes.valueOf(rs.getString("trip_types")))));
     }
 }

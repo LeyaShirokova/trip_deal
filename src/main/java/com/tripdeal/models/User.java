@@ -1,9 +1,5 @@
 package com.tripdeal.models;
 
-import com.tripdeal.MySuperId;
-
-import javax.persistence.*;
-
 public class User extends MySuperId {
     private String firstName;
     private String lastName;

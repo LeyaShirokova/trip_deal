@@ -1,7 +1,5 @@
 package com.tripdeal.models;
 
-import com.tripdeal.MySuperId;
-
 public class Guide extends MySuperId {
     private String idCertificate;
     private String descriptionGuide;

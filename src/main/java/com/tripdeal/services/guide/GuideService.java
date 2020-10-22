@@ -15,11 +15,12 @@ public class GuideService implements IGuideService {
 
     @Override
     public int save(Guide guide) {
-        if (guide.getRate() > 5 && guide.getRate() <= 0) {
-            System.out.println("The rating can be set no higher than 5");
-            return 0;
+        if (guide.getRate() > 5 && guide.getRate() < 0) {
+            throw new IllegalArgumentException("The rating can be set no higher than 5");
         }
-
+        if(guide.getIdCertificate().isEmpty()){
+            throw new IllegalArgumentException("If you are a guide you must fill in your certificate number");
+        }
         return guideRepository.save(guide);
     }
 
@@ -27,8 +28,7 @@ public class GuideService implements IGuideService {
     public int update(Guide guide) {
 
         if (guide.getRate() > 5 && guide.getRate() <= 0) {
-            System.out.println("The rating can be set no higher than 5");
-            return 0;
+            throw new IllegalArgumentException("The rating can be set no higher than 5");
         }
         return guideRepository.update(guide);
     }

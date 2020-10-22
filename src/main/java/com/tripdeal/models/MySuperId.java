@@ -1,4 +1,4 @@
-package com.tripdeal;
+package com.tripdeal.models;
 
 public class MySuperId {
     protected int id;
